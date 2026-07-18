@@ -1,0 +1,494 @@
+{
+  "_meta": {
+    "source_repo": "https://github.com/microsoftgraph/microsoft-graph-docs-contrib",
+    "source_ref": "62224816c538d192a2f3630c797a6b2171034bee",
+    "graph_version": "v1.0",
+    "generated_by": "scripts/build_permission_resources.py",
+    "generated": "2026-07-19",
+    "semantics": "effective_least_privileged lists ALTERNATIVES: any one satisfies the call. required_permissions is a list of alternative-sets: every inner list must be satisfied by at least one of its members (an AND of ORs). A null application value means no app-only token can make the call."
+  },
+  "GET /organization": {
+    "doc_page": "api-reference/v1.0/api/organization-list.md",
+    "doc_section": null,
+    "permissions_include": null,
+    "documented": {
+      "delegated_work_school": {
+        "least": [
+          "User.Read"
+        ],
+        "higher": [
+          "Organization.Read.All",
+          "Directory.Read.All",
+          "Organization.ReadWrite.All",
+          "Directory.ReadWrite.All"
+        ],
+        "format": "legacy-ordered"
+      },
+      "delegated_personal": {
+        "least": [],
+        "higher": [],
+        "format": "legacy-ordered"
+      },
+      "application": {
+        "least": [
+          "Organization.Read.All"
+        ],
+        "higher": [
+          "Directory.Read.All",
+          "Organization.ReadWrite.All",
+          "Directory.ReadWrite.All"
+        ],
+        "format": "legacy-ordered"
+      }
+    },
+    "effective_least_privileged": {
+      "delegated": [
+        "User.Read"
+      ],
+      "application": [
+        "Organization.Read.All"
+      ]
+    },
+    "app_only_supported": true,
+    "note": null,
+    "curation": "verbatim"
+  },
+  "GET /me": {
+    "doc_page": "api-reference/v1.0/api/user-get.md",
+    "doc_section": null,
+    "permissions_include": "api-reference/v1.0/includes/permissions/user-get-permissions.md",
+    "documented": {
+      "delegated_work_school": {
+        "least": [
+          "User.Read"
+        ],
+        "higher": [
+          "User.ReadWrite",
+          "User.ReadBasic.All",
+          "User.Read.All",
+          "User.ReadWrite.All",
+          "Directory.Read.All",
+          "Directory.ReadWrite.All"
+        ]
+      },
+      "delegated_personal": {
+        "least": [
+          "User.Read"
+        ],
+        "higher": [
+          "User.ReadWrite"
+        ]
+      },
+      "application": {
+        "least": [
+          "User.Read.All"
+        ],
+        "higher": [
+          "User.ReadWrite.All",
+          "Directory.Read.All",
+          "Directory.ReadWrite.All"
+        ]
+      }
+    },
+    "effective_least_privileged": {
+      "delegated": [
+        "User.Read"
+      ],
+      "application": null
+    },
+    "app_only_supported": false,
+    "note": "Application permissions aren't supported when using the /me endpoint (api-reference/v1.0/includes/me-apis-sign-in-note.md). No app-only client can satisfy this call at any permission level.",
+    "curation": "overridden"
+  },
+  "GET /me/transitiveMemberOf": {
+    "doc_page": "api-reference/v1.0/api/user-list-transitivememberof.md",
+    "doc_section": null,
+    "permissions_include": "api-reference/v1.0/includes/permissions/user-list-transitivememberof-permissions.md",
+    "documented": {
+      "delegated_work_school": {
+        "least": [
+          "User.Read"
+        ],
+        "higher": [
+          "Directory.Read.All",
+          "Directory.ReadWrite.All",
+          "Group.Read.All",
+          "GroupMember.Read.All",
+          "User.Read.All"
+        ]
+      },
+      "delegated_personal": {
+        "least": [],
+        "higher": []
+      },
+      "application": {
+        "least": [],
+        "higher": []
+      }
+    },
+    "effective_least_privileged": {
+      "delegated": [
+        "User.Read"
+      ],
+      "application": null
+    },
+    "app_only_supported": false,
+    "note": "Same /me app-only restriction as GET /me. The documented application permissions apply only to the /users/{id}/transitiveMemberOf form.",
+    "curation": "overridden"
+  },
+  "GET /users": {
+    "doc_page": "api-reference/v1.0/api/user-list.md",
+    "doc_section": null,
+    "permissions_include": null,
+    "documented": {
+      "delegated_work_school": {
+        "least": [
+          "User.ReadBasic.All"
+        ],
+        "higher": [
+          "User.Read.All",
+          "User.ReadWrite.All",
+          "Directory.Read.All",
+          "Directory.ReadWrite.All"
+        ],
+        "format": "legacy-ordered"
+      },
+      "delegated_personal": {
+        "least": [],
+        "higher": [],
+        "format": "legacy-ordered"
+      },
+      "application": {
+        "least": [
+          "User.Read.All"
+        ],
+        "higher": [
+          "User.ReadWrite.All",
+          "Directory.Read.All",
+          "Directory.ReadWrite.All"
+        ],
+        "format": "legacy-ordered"
+      }
+    },
+    "effective_least_privileged": {
+      "delegated": [
+        "User.ReadBasic.All"
+      ],
+      "application": [
+        "User.Read.All"
+      ]
+    },
+    "app_only_supported": true,
+    "note": null,
+    "curation": "verbatim"
+  },
+  "GET /groups": {
+    "doc_page": "api-reference/v1.0/api/group-list.md",
+    "doc_section": null,
+    "permissions_include": "api-reference/v1.0/includes/permissions/group-list-permissions.md",
+    "documented": {
+      "delegated_work_school": {
+        "least": [
+          "Group-NestingSupport.ReadWrite.All"
+        ],
+        "higher": [
+          "Directory.Read.All",
+          "Directory.ReadWrite.All",
+          "Group.ManageProtection.All",
+          "Group.Read.All",
+          "Group.ReadWrite.All",
+          "GroupMember.Read.All"
+        ]
+      },
+      "delegated_personal": {
+        "least": [],
+        "higher": []
+      },
+      "application": {
+        "least": [
+          "Group-NestingSupport.ReadWrite.All"
+        ],
+        "higher": [
+          "Directory.Read.All",
+          "Directory.ReadWrite.All",
+          "Group.ManageProtection.All",
+          "Group.Read.All",
+          "Group.ReadWrite.All",
+          "GroupMember.Read.All"
+        ]
+      }
+    },
+    "effective_least_privileged": {
+      "delegated": [
+        "Group.Read.All",
+        "Directory.Read.All"
+      ],
+      "application": [
+        "Group.Read.All",
+        "Directory.Read.All"
+      ]
+    },
+    "app_only_supported": true,
+    "note": "Upstream lists Group-NestingSupport.ReadWrite.All as least privileged, an artifact of the auto-generated table; it is a nesting-support scope, not a read scope. Group.Read.All is the practical minimum for listing groups.",
+    "curation": "overridden"
+  },
+  "GET /groups/{id}/members": {
+    "doc_page": "api-reference/v1.0/api/group-list-members.md",
+    "doc_section": null,
+    "permissions_include": "api-reference/v1.0/includes/permissions/group-list-members-permissions.md",
+    "documented": {
+      "delegated_work_school": {
+        "least": [
+          "GroupMember.Read.All"
+        ],
+        "higher": [
+          "Directory.Read.All",
+          "Group.Read.All",
+          "Group.ReadWrite.All",
+          "GroupMember.ReadWrite.All"
+        ]
+      },
+      "delegated_personal": {
+        "least": [],
+        "higher": []
+      },
+      "application": {
+        "least": [
+          "GroupMember.Read.All"
+        ],
+        "higher": [
+          "Directory.Read.All",
+          "Group.Read.All",
+          "Group.ReadWrite.All",
+          "GroupMember.ReadWrite.All"
+        ]
+      }
+    },
+    "effective_least_privileged": {
+      "delegated": [
+        "GroupMember.Read.All"
+      ],
+      "application": [
+        "GroupMember.Read.All"
+      ]
+    },
+    "app_only_supported": true,
+    "note": null,
+    "curation": "verbatim"
+  },
+  "GET /identity/conditionalAccess/policies": {
+    "doc_page": "api-reference/v1.0/api/conditionalaccessroot-list-policies.md",
+    "doc_section": null,
+    "permissions_include": "api-reference/v1.0/includes/permissions/conditionalaccessroot-list-policies-permissions.md",
+    "documented": {
+      "delegated_work_school": {
+        "least": [
+          "Policy.Read.All"
+        ],
+        "higher": [
+          "Not available."
+        ]
+      },
+      "delegated_personal": {
+        "least": [],
+        "higher": []
+      },
+      "application": {
+        "least": [
+          "Policy.Read.All"
+        ],
+        "higher": [
+          "Not available."
+        ]
+      }
+    },
+    "effective_least_privileged": {
+      "delegated": [
+        "Policy.Read.All"
+      ],
+      "application": [
+        "Policy.Read.All"
+      ]
+    },
+    "app_only_supported": true,
+    "note": null,
+    "curation": "verbatim"
+  },
+  "GET /servicePrincipals": {
+    "doc_page": "api-reference/v1.0/api/serviceprincipal-list.md",
+    "doc_section": null,
+    "permissions_include": "api-reference/v1.0/includes/permissions/serviceprincipal-list-permissions.md",
+    "documented": {
+      "delegated_work_school": {
+        "least": [
+          "Application.Read.All"
+        ],
+        "higher": [
+          "Application.ReadWrite.All",
+          "Directory.Read.All",
+          "Directory.ReadWrite.All"
+        ]
+      },
+      "delegated_personal": {
+        "least": [],
+        "higher": []
+      },
+      "application": {
+        "least": [
+          "Application.Read.All"
+        ],
+        "higher": [
+          "Application.ReadWrite.OwnedBy",
+          "Application.ReadWrite.All",
+          "Directory.Read.All"
+        ]
+      }
+    },
+    "effective_least_privileged": {
+      "delegated": [
+        "Application.Read.All"
+      ],
+      "application": [
+        "Application.Read.All"
+      ]
+    },
+    "app_only_supported": true,
+    "note": null,
+    "curation": "verbatim"
+  },
+  "GET /servicePrincipals/{id}/appRoleAssignments": {
+    "doc_page": "api-reference/v1.0/api/serviceprincipal-list-approleassignments.md",
+    "doc_section": null,
+    "permissions_include": "api-reference/v1.0/includes/permissions/serviceprincipal-list-approleassignments-permissions.md",
+    "documented": {
+      "delegated_work_school": {
+        "least": [
+          "Application.Read.All"
+        ],
+        "higher": [
+          "Application.ReadWrite.All",
+          "Directory.Read.All",
+          "Directory.ReadWrite.All"
+        ]
+      },
+      "delegated_personal": {
+        "least": [],
+        "higher": []
+      },
+      "application": {
+        "least": [
+          "Application.Read.All"
+        ],
+        "higher": [
+          "Application.ReadWrite.All",
+          "Application.ReadWrite.OwnedBy",
+          "Directory.Read.All",
+          "Directory.ReadWrite.All"
+        ]
+      }
+    },
+    "effective_least_privileged": {
+      "delegated": [
+        "Application.Read.All"
+      ],
+      "application": [
+        "Application.Read.All"
+      ]
+    },
+    "app_only_supported": true,
+    "note": null,
+    "curation": "verbatim"
+  },
+  "GET /roleManagement/directory/roleDefinitions": {
+    "doc_page": "api-reference/v1.0/api/rbacapplication-list-roledefinitions.md",
+    "doc_section": "For the directory (Microsoft Entra ID) provider",
+    "permissions_include": null,
+    "documented": {
+      "delegated_work_school": {
+        "least": [
+          "RoleManagement.Read.Directory"
+        ],
+        "higher": [
+          "Directory.Read.All",
+          "RoleManagement.ReadWrite.Directory",
+          "Directory.ReadWrite.All"
+        ],
+        "format": "legacy-ordered"
+      },
+      "delegated_personal": {
+        "least": [],
+        "higher": [],
+        "format": "legacy-ordered"
+      },
+      "application": {
+        "least": [
+          "RoleManagement.Read.Directory"
+        ],
+        "higher": [
+          "Directory.Read.All",
+          "RoleManagement.ReadWrite.Directory",
+          "Directory.ReadWrite.All"
+        ],
+        "format": "legacy-ordered"
+      }
+    },
+    "effective_least_privileged": {
+      "delegated": [
+        "RoleManagement.Read.Directory"
+      ],
+      "application": [
+        "RoleManagement.Read.Directory"
+      ]
+    },
+    "app_only_supported": true,
+    "note": null,
+    "curation": "verbatim"
+  },
+  "GET /roleManagement/directory/roleAssignments": {
+    "doc_page": "api-reference/v1.0/api/rbacapplication-list-roleassignments.md",
+    "doc_section": "For the directory (Microsoft Entra ID) provider",
+    "permissions_include": null,
+    "documented": {
+      "delegated_work_school": {
+        "least": [
+          "RoleManagement.Read.Directory"
+        ],
+        "higher": [
+          "RoleManagement.Read.All",
+          "Directory.Read.All",
+          "RoleManagement.ReadWrite.Directory",
+          "Directory.ReadWrite.All"
+        ],
+        "format": "legacy-ordered"
+      },
+      "delegated_personal": {
+        "least": [],
+        "higher": [],
+        "format": "legacy-ordered"
+      },
+      "application": {
+        "least": [
+          "RoleManagement.Read.Directory"
+        ],
+        "higher": [
+          "RoleManagement.Read.All",
+          "Directory.Read.All",
+          "RoleManagement.ReadWrite.Directory",
+          "Directory.ReadWrite.All"
+        ],
+        "format": "legacy-ordered"
+      }
+    },
+    "effective_least_privileged": {
+      "delegated": [
+        "RoleManagement.Read.Directory"
+      ],
+      "application": [
+        "RoleManagement.Read.Directory"
+      ]
+    },
+    "app_only_supported": true,
+    "note": null,
+    "curation": "verbatim"
+  }
+}

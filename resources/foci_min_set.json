@@ -1,0 +1,1018 @@
+{
+  "_meta": {
+    "command": "enum all",
+    "coverage_model": "any-accepted-scope (least or any higher-privileged alternative)",
+    "candidate_count": 45,
+    "data_source": "entrascopes firstpartyscopes.json (Graph resource 00000003-0000-0000-c000-000000000000)",
+    "generated_by": "scripts/analyze_foci_min_set.py",
+    "generated": "2026-07-19",
+    "caveats": [
+      "Capability, not guarantee: .default yields the app's pre-authorized scopes intersected with what the user/tenant consented; this says which clients CAN carry the scopes, not that a given sign-in will.",
+      "Delegated effective permission = app scope AND the signed-in user's directory privilege. A token bearing Directory.Read.All still returns data only if the user actually has that access.",
+      "/me endpoints stay in the required set (they need only User.Read). GroupMember.Read.All (groups/{id}/members) is optional -- reported separately -- since it is only reached when a group holds a privileged role."
+    ]
+  },
+  "excluded_clients": {
+    "directory_access_as_user": [
+      {
+        "client_id": "d3590ed6-52b3-4102-aeff-aad2292ab01c",
+        "app_name": "Microsoft Office"
+      },
+      {
+        "client_id": "00b41c95-dab0-4487-9791-b9d2c32c80f2",
+        "app_name": "Office 365 Management"
+      }
+    ],
+    "absent_from_data": []
+  },
+  "required_endpoints": [
+    "GET /organization",
+    "GET /me",
+    "GET /me/transitiveMemberOf",
+    "GET /users",
+    "GET /groups",
+    "GET /identity/conditionalAccess/policies",
+    "GET /servicePrincipals",
+    "GET /servicePrincipals/{id}/appRoleAssignments",
+    "GET /roleManagement/directory/roleDefinitions",
+    "GET /roleManagement/directory/roleAssignments"
+  ],
+  "optional_endpoints": [
+    "GET /groups/{id}/members"
+  ],
+  "accepted_scopes": {
+    "GET /organization": [
+      "User.Read",
+      "Organization.Read.All",
+      "Directory.Read.All",
+      "Organization.ReadWrite.All",
+      "Directory.ReadWrite.All"
+    ],
+    "GET /me": [
+      "User.Read",
+      "User.ReadWrite",
+      "User.ReadBasic.All",
+      "User.Read.All",
+      "User.ReadWrite.All",
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ],
+    "GET /me/transitiveMemberOf": [
+      "User.Read",
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
+      "Group.Read.All",
+      "GroupMember.Read.All",
+      "User.Read.All"
+    ],
+    "GET /users": [
+      "User.ReadBasic.All",
+      "User.Read.All",
+      "User.ReadWrite.All",
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ],
+    "GET /groups": [
+      "Group-NestingSupport.ReadWrite.All",
+      "Directory.Read.All",
+      "Directory.ReadWrite.All",
+      "Group.ManageProtection.All",
+      "Group.Read.All",
+      "Group.ReadWrite.All",
+      "GroupMember.Read.All"
+    ],
+    "GET /identity/conditionalAccess/policies": [
+      "Policy.Read.All"
+    ],
+    "GET /servicePrincipals": [
+      "Application.Read.All",
+      "Application.ReadWrite.All",
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ],
+    "GET /servicePrincipals/{id}/appRoleAssignments": [
+      "Application.Read.All",
+      "Application.ReadWrite.All",
+      "Directory.Read.All",
+      "Directory.ReadWrite.All"
+    ],
+    "GET /roleManagement/directory/roleDefinitions": [
+      "RoleManagement.Read.Directory",
+      "Directory.Read.All",
+      "RoleManagement.ReadWrite.Directory",
+      "Directory.ReadWrite.All"
+    ],
+    "GET /roleManagement/directory/roleAssignments": [
+      "RoleManagement.Read.Directory",
+      "RoleManagement.Read.All",
+      "Directory.Read.All",
+      "RoleManagement.ReadWrite.Directory",
+      "Directory.ReadWrite.All"
+    ],
+    "GET /groups/{id}/members": [
+      "GroupMember.Read.All",
+      "Directory.Read.All",
+      "Group.Read.All",
+      "Group.ReadWrite.All",
+      "GroupMember.ReadWrite.All"
+    ]
+  },
+  "uncoverable_required_endpoints": [
+    {
+      "endpoint": "GET /identity/conditionalAccess/policies",
+      "accepted": [
+        "Policy.Read.All"
+      ],
+      "coverable_only_by_excluded": null,
+      "note": "no family client (incl. excluded) carries an accepted scope"
+    }
+  ],
+  "minimum_set": {
+    "covers": [
+      "GET /organization",
+      "GET /me",
+      "GET /me/transitiveMemberOf",
+      "GET /users",
+      "GET /groups",
+      "GET /servicePrincipals",
+      "GET /servicePrincipals/{id}/appRoleAssignments",
+      "GET /roleManagement/directory/roleDefinitions",
+      "GET /roleManagement/directory/roleAssignments"
+    ],
+    "size": 1,
+    "note": "covers the coverable required endpoints; uncoverable ones listed separately",
+    "solutions": [
+      {
+        "clients": [
+          {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "User.Read"
+          },
+          "GET /me": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "User.Read"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "User.Read"
+          },
+          "GET /users": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "User.ReadBasic.All"
+          },
+          "GET /groups": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "Application.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "Application.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "RoleManagement.Read.Directory"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "RoleManagement.Read.Directory"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      },
+      {
+        "clients": [
+          {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /me": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "User.ReadBasic.All"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /users": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "User.ReadBasic.All"
+          },
+          "GET /groups": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      },
+      {
+        "clients": [
+          {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /me": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "User.Read.All"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /users": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "User.Read.All"
+          },
+          "GET /groups": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      },
+      {
+        "clients": [
+          {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Organization.Read.All"
+          },
+          "GET /me": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "User.Read.All"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /users": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "User.Read.All"
+          },
+          "GET /groups": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      },
+      {
+        "clients": [
+          {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /me": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "User.Read.All"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /users": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "User.Read.All"
+          },
+          "GET /groups": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      },
+      {
+        "clients": [
+          {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /me": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "User.Read.All"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /users": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "User.Read.All"
+          },
+          "GET /groups": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      },
+      {
+        "clients": [
+          {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /me": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "User.Read.All"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /users": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "User.Read.All"
+          },
+          "GET /groups": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      }
+    ]
+  },
+  "minimum_set_with_optional": {
+    "covers": [
+      "GET /organization",
+      "GET /me",
+      "GET /me/transitiveMemberOf",
+      "GET /users",
+      "GET /groups",
+      "GET /servicePrincipals",
+      "GET /servicePrincipals/{id}/appRoleAssignments",
+      "GET /roleManagement/directory/roleDefinitions",
+      "GET /roleManagement/directory/roleAssignments",
+      "GET /groups/{id}/members"
+    ],
+    "size": 1,
+    "solutions": [
+      {
+        "clients": [
+          {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "User.Read"
+          },
+          "GET /me": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "User.Read"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "User.Read"
+          },
+          "GET /users": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "User.ReadBasic.All"
+          },
+          "GET /groups": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "Application.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "Application.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "RoleManagement.Read.Directory"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "RoleManagement.Read.Directory"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "57336123-6e14-4acc-8dcf-287b6088aa28",
+            "app_name": "Microsoft Whiteboard Client",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      },
+      {
+        "clients": [
+          {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /me": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "User.ReadBasic.All"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /users": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "User.ReadBasic.All"
+          },
+          "GET /groups": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "540d4ff4-b4c0-44c1-bd06-cab1782d582a",
+            "app_name": "ODSP Mobile Lists App",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      },
+      {
+        "clients": [
+          {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /me": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "User.Read.All"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /users": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "User.Read.All"
+          },
+          "GET /groups": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "b26aadf8-566f-4478-926f-589f601d9c74",
+            "app_name": "OneDrive",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      },
+      {
+        "clients": [
+          {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Organization.Read.All"
+          },
+          "GET /me": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "User.Read.All"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /users": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "User.Read.All"
+          },
+          "GET /groups": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "f05ff7c9-f75a-4acd-a3b5-f4b6a870245d",
+            "app_name": "SharePoint Android",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      },
+      {
+        "clients": [
+          {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /me": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "User.Read.All"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /users": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "User.Read.All"
+          },
+          "GET /groups": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "af124e86-4e96-495a-b70a-90f90ab96707",
+            "app_name": "OneDrive iOS App",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      },
+      {
+        "clients": [
+          {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /me": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "User.Read.All"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /users": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "User.Read.All"
+          },
+          "GET /groups": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "d326c1ce-6cc6-4de2-bebc-4591e5e13ef0",
+            "app_name": "SharePoint",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      },
+      {
+        "clients": [
+          {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner"
+          }
+        ],
+        "scope_attribution": {
+          "GET /organization": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /me": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "User.Read.All"
+          },
+          "GET /me/transitiveMemberOf": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /users": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "User.Read.All"
+          },
+          "GET /groups": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /identity/conditionalAccess/policies": null,
+          "GET /servicePrincipals": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /servicePrincipals/{id}/appRoleAssignments": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleDefinitions": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /roleManagement/directory/roleAssignments": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          },
+          "GET /groups/{id}/members": {
+            "client_id": "66375f6b-983f-4c2c-9701-d680650f588f",
+            "app_name": "Microsoft Planner",
+            "via_scope": "Directory.Read.All"
+          }
+        }
+      }
+    ]
+  }
+}

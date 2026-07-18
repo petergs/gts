@@ -1,0 +1,353 @@
+{
+  "_meta": {
+    "source_repo": "https://github.com/microsoftgraph/microsoft-graph-docs-contrib",
+    "source_ref": "62224816c538d192a2f3630c797a6b2171034bee",
+    "graph_version": "v1.0",
+    "generated_by": "scripts/build_permission_resources.py",
+    "generated": "2026-07-19",
+    "semantics": "effective_least_privileged lists ALTERNATIVES: any one satisfies the call. required_permissions is a list of alternative-sets: every inner list must be satisfied by at least one of its members (an AND of ORs). A null application value means no app-only token can make the call."
+  },
+  "organization": {
+    "endpoints": [
+      {
+        "endpoint": "GET /organization",
+        "required": true
+      }
+    ],
+    "required_permissions": {
+      "delegated": [
+        [
+          "User.Read"
+        ]
+      ],
+      "application": [
+        [
+          "Organization.Read.All"
+        ]
+      ]
+    },
+    "optional_permissions": null,
+    "app_only": "supported",
+    "app_only_blocked_by": null
+  },
+  "current-user": {
+    "endpoints": [
+      {
+        "endpoint": "GET /me",
+        "required": true
+      }
+    ],
+    "required_permissions": {
+      "delegated": [
+        [
+          "User.Read"
+        ]
+      ],
+      "application": null
+    },
+    "optional_permissions": null,
+    "app_only": "unsupported",
+    "app_only_blocked_by": [
+      "GET /me"
+    ]
+  },
+  "current-user-memberships": {
+    "endpoints": [
+      {
+        "endpoint": "GET /me/transitiveMemberOf",
+        "required": true
+      }
+    ],
+    "required_permissions": {
+      "delegated": [
+        [
+          "User.Read"
+        ]
+      ],
+      "application": null
+    },
+    "optional_permissions": null,
+    "app_only": "unsupported",
+    "app_only_blocked_by": [
+      "GET /me/transitiveMemberOf"
+    ]
+  },
+  "users": {
+    "endpoints": [
+      {
+        "endpoint": "GET /users",
+        "required": true
+      }
+    ],
+    "required_permissions": {
+      "delegated": [
+        [
+          "User.ReadBasic.All"
+        ]
+      ],
+      "application": [
+        [
+          "User.Read.All"
+        ]
+      ]
+    },
+    "optional_permissions": null,
+    "app_only": "supported",
+    "app_only_blocked_by": null
+  },
+  "groups": {
+    "endpoints": [
+      {
+        "endpoint": "GET /groups",
+        "required": true
+      }
+    ],
+    "required_permissions": {
+      "delegated": [
+        [
+          "Group.Read.All",
+          "Directory.Read.All"
+        ]
+      ],
+      "application": [
+        [
+          "Group.Read.All",
+          "Directory.Read.All"
+        ]
+      ]
+    },
+    "optional_permissions": null,
+    "app_only": "supported",
+    "app_only_blocked_by": null
+  },
+  "conditional-access": {
+    "endpoints": [
+      {
+        "endpoint": "GET /identity/conditionalAccess/policies",
+        "required": true
+      }
+    ],
+    "required_permissions": {
+      "delegated": [
+        [
+          "Policy.Read.All"
+        ]
+      ],
+      "application": [
+        [
+          "Policy.Read.All"
+        ]
+      ]
+    },
+    "optional_permissions": null,
+    "app_only": "supported",
+    "app_only_blocked_by": null
+  },
+  "service-principals": {
+    "endpoints": [
+      {
+        "endpoint": "GET /servicePrincipals",
+        "required": true,
+        "purpose": "listed twice: filtered by displayName eq 'Microsoft Graph' to resolve appRole GUIDs, then unfiltered to enumerate tenant-owned SPs"
+      },
+      {
+        "endpoint": "GET /organization",
+        "required": true,
+        "purpose": "resolve tenant id for the appOwnerOrganizationId filter"
+      },
+      {
+        "endpoint": "GET /servicePrincipals/{id}/appRoleAssignments",
+        "required": true,
+        "per_item": true,
+        "purpose": "resolve granted app roles per service principal"
+      }
+    ],
+    "required_permissions": {
+      "delegated": [
+        [
+          "Application.Read.All"
+        ],
+        [
+          "User.Read"
+        ]
+      ],
+      "application": [
+        [
+          "Application.Read.All"
+        ],
+        [
+          "Organization.Read.All"
+        ]
+      ]
+    },
+    "optional_permissions": null,
+    "app_only": "supported",
+    "app_only_blocked_by": null
+  },
+  "privileged-role-assignments": {
+    "endpoints": [
+      {
+        "endpoint": "GET /roleManagement/directory/roleDefinitions",
+        "required": true,
+        "purpose": "v1.0 filtered client-side against DEFAULT_PRIVILEGED_ROLES; with --beta, the beta endpoint with $filter=isPrivileged eq true"
+      },
+      {
+        "endpoint": "GET /roleManagement/directory/roleAssignments",
+        "required": true,
+        "purpose": "$expand=principal per privileged role definition"
+      },
+      {
+        "endpoint": "GET /groups/{id}/members",
+        "required": false,
+        "conditional": "only when a group is assigned a privileged role",
+        "purpose": "resolve group members of group principals"
+      }
+    ],
+    "required_permissions": {
+      "delegated": [
+        [
+          "RoleManagement.Read.Directory"
+        ]
+      ],
+      "application": [
+        [
+          "RoleManagement.Read.Directory"
+        ]
+      ]
+    },
+    "optional_permissions": {
+      "delegated": [
+        [
+          "GroupMember.Read.All"
+        ]
+      ],
+      "application": [
+        [
+          "GroupMember.Read.All"
+        ]
+      ]
+    },
+    "app_only": "supported",
+    "app_only_blocked_by": null
+  },
+  "all": {
+    "endpoints": [
+      {
+        "endpoint": "GET /organization",
+        "required": true
+      },
+      {
+        "endpoint": "GET /me",
+        "required": true
+      },
+      {
+        "endpoint": "GET /me/transitiveMemberOf",
+        "required": true
+      },
+      {
+        "endpoint": "GET /users",
+        "required": true
+      },
+      {
+        "endpoint": "GET /groups",
+        "required": true
+      },
+      {
+        "endpoint": "GET /identity/conditionalAccess/policies",
+        "required": true
+      },
+      {
+        "endpoint": "GET /servicePrincipals",
+        "required": true,
+        "purpose": "listed twice: filtered by displayName eq 'Microsoft Graph' to resolve appRole GUIDs, then unfiltered to enumerate tenant-owned SPs"
+      },
+      {
+        "endpoint": "GET /servicePrincipals/{id}/appRoleAssignments",
+        "required": true,
+        "per_item": true,
+        "purpose": "resolve granted app roles per service principal"
+      },
+      {
+        "endpoint": "GET /roleManagement/directory/roleDefinitions",
+        "required": true,
+        "purpose": "v1.0 filtered client-side against DEFAULT_PRIVILEGED_ROLES; with --beta, the beta endpoint with $filter=isPrivileged eq true"
+      },
+      {
+        "endpoint": "GET /roleManagement/directory/roleAssignments",
+        "required": true,
+        "purpose": "$expand=principal per privileged role definition"
+      },
+      {
+        "endpoint": "GET /groups/{id}/members",
+        "required": false,
+        "conditional": "only when a group is assigned a privileged role",
+        "purpose": "resolve group members of group principals"
+      }
+    ],
+    "required_permissions": {
+      "delegated": [
+        [
+          "User.Read"
+        ],
+        [
+          "User.ReadBasic.All"
+        ],
+        [
+          "Group.Read.All",
+          "Directory.Read.All"
+        ],
+        [
+          "Policy.Read.All"
+        ],
+        [
+          "Application.Read.All"
+        ],
+        [
+          "RoleManagement.Read.Directory"
+        ]
+      ],
+      "application": [
+        [
+          "Organization.Read.All"
+        ],
+        [
+          "User.Read.All"
+        ],
+        [
+          "Group.Read.All",
+          "Directory.Read.All"
+        ],
+        [
+          "Policy.Read.All"
+        ],
+        [
+          "Application.Read.All"
+        ],
+        [
+          "RoleManagement.Read.Directory"
+        ]
+      ]
+    },
+    "optional_permissions": {
+      "delegated": [
+        [
+          "GroupMember.Read.All"
+        ]
+      ],
+      "application": [
+        [
+          "GroupMember.Read.All"
+        ]
+      ]
+    },
+    "app_only": "partial",
+    "app_only_blocked_by": [
+      "GET /me",
+      "GET /me/transitiveMemberOf"
+    ],
+    "app_only_skipped_commands": [
+      "current-user",
+      "current-user-memberships"
+    ]
+  }
+}
