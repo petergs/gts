@@ -190,8 +190,8 @@ wheels = [
 ]
 
 [[package]]
-name = "gts"
-version = "0.1.0"
+name = "graph-token-store"
+version = "0.1.1"
 source = { editable = "." }
 dependencies = [
     { name = "keyring" },

@@ -1,0 +1,43 @@
+name: Release
+
+# Publishes graph-token-store to PyPI 
+on:
+  release:
+    types: [published]
+  workflow_dispatch: {}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Lint and test
+        run: |
+          uv sync
+          uv run ruff check .
+          uv run pytest -q
+
+      - name: Guard — release tag must match project version
+        if: github.event_name == 'release'
+        run: |
+          version="$(uv version --short)"
+          tag="${GITHUB_REF_NAME#v}"
+          if [ "$version" != "$tag" ]; then
+            echo "::error::Release tag '$tag' does not match project version '$version'"
+            exit 1
+          fi
+
+      - name: Build
+        run: uv build
+
+      - name: Publish to PyPI (trusted publishing)
+        run: uv publish

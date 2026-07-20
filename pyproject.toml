@@ -2,7 +2,7 @@
 # PyPI distribution name (the import package and `gts` command are unchanged -- see
 # [tool.uv.build-backend] module-name below). "gts" itself is already taken on PyPI.
 name = "graph-token-store"
-version = "0.1.0"
+version = "0.1.1"
 description = "A cli for managing Graph API tokens"
 readme = "README.md"
 license = "MIT"

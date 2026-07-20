@@ -1099,6 +1099,19 @@ _WHITEBOARD = "57336123-6e14-4acc-8dcf-287b6088aa28"
 _MSOFFICE = "d3590ed6-52b3-4102-aeff-aad2292ab01c"  # holds Directory.AccessAsUser.All
 
 
+def test_version_flag_matches_package_version():
+    """`gts --version` prints the single-sourced package version (from dist metadata)."""
+    from typer.testing import CliRunner
+
+    import gts
+    from gts.cli import app
+
+    res = CliRunner().invoke(app, ["--version"])
+    assert res.exit_code == 0
+    assert res.output.strip() == gts.__version__
+    assert gts.__version__ != "0.0.0+unknown"  # installed, so metadata resolved
+
+
 def test_clients_schema_is_wellformed():
     from gts import constants as c
 
